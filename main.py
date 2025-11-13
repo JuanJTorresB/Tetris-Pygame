@@ -3,12 +3,13 @@ import sys
 from game import Game
 
 pygame.init()
-primary_color = (245, 245, 245)
-
+primary_color = (158, 0, 255)
+UI_color = (52, 14, 57)
 title_font = pygame.font.Font(None, 40)
-score_surface = title_font.render("Score", True, (0, 0, 0))
-next_surface = title_font.render("Next", True, (0, 0, 0))
-game_over_surface = title_font.render("Game Over", True, (0, 0, 0))
+score_surface = title_font.render("Score", True, UI_color)
+next_surface = title_font.render("Next", True, UI_color)
+game_over_surface = title_font.render("Game Over", True, UI_color)
+
 
 score_rect = pygame.Rect(320, 55, 170, 60)
 next_rect = pygame.Rect(320, 215, 170, 180)
@@ -43,10 +44,13 @@ while True:
         game.move_rigth()
       if event.key == pygame.K_DOWN and not game.game_over:
         game.move_down()
+        game.update_score(0, 1)
       if event.key == pygame.K_UP and not game.game_over:
         game.rotate()
     if event.type == GAME_UPDATE and not game.game_over:
       game.move_down()
+        
+  score_value_surface = title_font.render(str(game.score), True, (255,255,255))
         
   screen.fill(primary_color)
   screen.blit(score_surface, (365, 20, 50, 50))
@@ -55,8 +59,9 @@ while True:
   if game.game_over:
     screen.blit(game_over_surface, (320, 450, 50, 50))
   
-  pygame.draw.rect(screen, (10,10,10), score_rect, 0, 10)
-  pygame.draw.rect(screen, (10,10,10), next_rect, 0, 10)
+  pygame.draw.rect(screen, UI_color, score_rect, 0, 10)
+  screen.blit(score_value_surface, score_value_surface.get_rect(centerx = score_rect.centerx, centery= score_rect.centery))
+  pygame.draw.rect(screen, UI_color, next_rect, 0, 10)
   
   game.draw(screen)
   

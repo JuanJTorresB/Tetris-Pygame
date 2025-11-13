@@ -1,5 +1,5 @@
 class Colors:
-  borde_suave = (220, 220, 220)
+  borde_suave = (52, 14, 57)
   azul_pastel = (173, 216, 230)
   amarillo_pastel = (255, 253, 208)
   lila_pastel = (216, 191, 216)
